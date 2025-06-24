@@ -14,7 +14,7 @@ This is a group project built with Laravel for managing golf tournaments. It pro
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/balqisstudy/golf-tournament
    cd golf-tournament
    ```
 
@@ -74,12 +74,35 @@ php artisan test
 
 ## Git & Collaboration Workflow
 
-- Create a new branch for each feature or bugfix:
+- **Always pull the latest changes before starting work:**
+  ```bash
+  git pull origin main
+  ```
+- **Create a new branch for each feature or bugfix:**
   ```bash
   git checkout -b feature/your-feature-name
   ```
-- Commit your changes with clear messages.
-- Push your branch and open a Pull Request on GitHub.
+- **Commit your changes with clear messages:**
+  ```bash
+  git add .
+  git commit -m "your descriptive commit message"
+  ```
+- **Push your branch to GitHub:**
+  ```bash
+  git push origin feature/your-feature-name
+  ```
+- **Open a Pull Request on GitHub** for review and merging.
+- **If working directly on main (not recommended):**
+  - Always pull before you start:
+    ```bash
+    git pull origin main
+    ```
+  - Add, commit, and push your changes:
+    ```bash
+    git add .
+    git commit -m "your descriptive commit message"
+    git push origin main
+    ```
 - Review and testing by other collaborators before merging to `main`.
 
 ## Contribution Guidelines
