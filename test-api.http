@@ -1,0 +1,35 @@
+### Test if server is working
+GET http://localhost:8000/test
+
+### Get all players
+GET http://localhost:8000/api/players
+Accept: application/json
+
+### Create a new player
+POST http://localhost:8000/api/players
+Content-Type: application/json
+Accept: application/json
+
+{
+    "Name": "Test Player",
+    "Email": "test@example.com",
+    "Password": "password123"
+}
+
+### Get specific player (replace 1 with actual ID)
+GET http://localhost:8000/api/players/1
+Accept: application/json
+
+### Update player (replace 1 with actual ID)
+PUT http://localhost:8000/api/players/1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "Name": "Updated Player Name",
+    "Email": "updated@example.com"
+}
+
+### Delete player (replace 1 with actual ID)
+DELETE http://localhost:8000/api/players/1
+Accept: application/json

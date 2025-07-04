@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Player API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        button { padding: 10px; margin: 5px; background: #007cba; color: white; border: none; cursor: pointer; }
+        pre { background: #f5f5f5; padding: 10px; overflow-x: auto; }
+        input { padding: 8px; margin: 5px; width: 200px; }
+    </style>
+</head>
+<body>
+    <h1>Golf Tournament - Player API Test</h1>
+    
+    <div class="test-section">
+        <h3>1. Get All Players</h3>
+        <button onclick="getAllPlayers()">Get All Players</button>
+        <pre id="allPlayersResult"></pre>
+    </div>
+
+    <div class="test-section">
+        <h3>2. Create New Player</h3>
+        <input type="text" id="playerName" placeholder="Player Name" value="Test Player"><br>
+        <input type="email" id="playerEmail" placeholder="Email" value="test@example.com"><br>
+        <input type="password" id="playerPassword" placeholder="Password" value="password123"><br>
+        <button onclick="createPlayer()">Create Player</button>
+        <pre id="createPlayerResult"></pre>
+    </div>
+
+    <div class="test-section">
+        <h3>3. Get Specific Player</h3>
+        <input type="number" id="playerId" placeholder="Player ID" value="1">
+        <button onclick="getPlayer()">Get Player</button>
+        <pre id="getPlayerResult"></pre>
+    </div>
+
+    <script>
+        const baseUrl = '/api/players';
+        
+        async function getAllPlayers() {
+            try {
+                const response = await fetch(baseUrl, {
+                    headers: { 'Accept': 'application/json' }
+                });
+                const data = await response.json();
+                document.getElementById('allPlayersResult').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('allPlayersResult').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function createPlayer() {
+            const name = document.getElementById('playerName').value;
+            const email = document.getElementById('playerEmail').value;
+            const password = document.getElementById('playerPassword').value;
+            
+            try {
+                const response = await fetch(baseUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        Name: name,
+                        Email: email,
+                        Password: password
+                    })
+                });
+                const data = await response.json();
+                document.getElementById('createPlayerResult').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('createPlayerResult').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function getPlayer() {
+            const id = document.getElementById('playerId').value;
+            
+            try {
+                const response = await fetch(`${baseUrl}/${id}`, {
+                    headers: { 'Accept': 'application/json' }
+                });
+                const data = await response.json();
+                document.getElementById('getPlayerResult').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('getPlayerResult').textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

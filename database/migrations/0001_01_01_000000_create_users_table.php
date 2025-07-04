@@ -12,13 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->id('UserID');
+            $table->string('Name');
+            $table->string('Email')->unique();
+            $table->string('Password');
+            $table->enum('Role', ['admin', 'player'])->default('player');
+            $table->timestamp('RegistrationDate')->useCurrent();
+            $table->unsignedBigInteger('NotificationID')->nullable();
             $table->timestamps();
+            
+            // Add foreign key constraint for NotificationID if needed
+            // $table->foreign('NotificationID')->references('NotificationID')->on('notifications');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
